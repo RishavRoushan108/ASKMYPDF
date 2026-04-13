@@ -1,0 +1,77 @@
+{
+  "messages": "Based on the context provided from the PDF, here are the important questions related to the poem:\n\n1.  **What is the kind of pain and ache that the poet feels?**\n2.  **Why are the young trees described as ‘sprinting’?**\n3.  **Why has the poet brought in the image of the merry children ‘spilling out of their homes’?**\n4.  **Why has the mother been compared to the ‘late winter’s moon’?**\n5.  **What do the parting words of the poet and her smile signify?**",
+  "docs": [
+    {
+      "pageContent": "it out\n1. What is the kind of pain and ache that the poet feels?\n2. Why are the young trees described as ‘sprinting’?\n3. Why has the poet brought in the image of the merry children ‘spilling out\nof their homes’?\n4. \nWhy has the mother been compared to the ‘late winter’s moon’?\n5. What do the",
+      "metadata": {
+        "source": "uploads\\1775351944914-144135245-lefl111.pdf",
+        "pdf": {
+          "version": "5.5.207",
+          "info": {
+            "PDFFormatVersion": "1.4",
+            "Language": null,
+            "EncryptFilterName": null,
+            "IsLinearized": false,
+            "IsAcroFormPresent": false,
+            "IsXFAPresent": false,
+            "IsCollectionPresent": false,
+            "IsSignaturesPresent": false,
+            "CreationDate": "D:20241211112205+05'30'",
+            "Creator": "Adobe InDesign CS6 (Windows)",
+            "ModDate": "D:20260327122629+05'30'",
+            "Producer": "Adobe PDF Library 10.0.1",
+            "Trapped": {
+              "name": "False"
+            }
+          },
+          "metadata": {},
+          "totalPages": 3
+        },
+        "loc": {
+          "pageNumber": 3,
+          "lines": {
+            "from": 9,
+            "to": 16
+          }
+        }
+      },
+      "id": "604c4a07-f7ca-46ad-b79b-70eaea98d04c"
+    },
+    {
+      "pageContent": "do the parting words of the poet and her smile signify?\nNotice that the whole poem is in a single sentence, punctuated by\ncommas.\nIt indicates a single thread of thought interspersed with observations\nof the real world around and the way these are connected to the main\nidea.",
+      "metadata": {
+        "source": "uploads\\1775351944914-144135245-lefl111.pdf",
+        "pdf": {
+          "version": "5.5.207",
+          "info": {
+            "PDFFormatVersion": "1.4",
+            "Language": null,
+            "EncryptFilterName": null,
+            "IsLinearized": false,
+            "IsAcroFormPresent": false,
+            "IsXFAPresent": false,
+            "IsCollectionPresent": false,
+            "IsSignaturesPresent": false,
+            "CreationDate": "D:20241211112205+05'30'",
+            "Creator": "Adobe InDesign CS6 (Windows)",
+            "ModDate": "D:20260327122629+05'30'",
+            "Producer": "Adobe PDF Library 10.0.1",
+            "Trapped": {
+              "name": "False"
+            }
+          },
+          "metadata": {},
+          "totalPages": 3
+        },
+        "loc": {
+          "pageNumber": 3,
+          "lines": {
+            "from": 16,
+            "to": 21
+          }
+        }
+      },
+      "id": "298f75b0-e43e-4ee0-899f-d95be32231a5"
+    }
+  ]
+}
