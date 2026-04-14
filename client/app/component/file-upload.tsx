@@ -16,7 +16,7 @@ const FileUpload: React.FC = () => {
           const formData = new FormData();
           formData.append("pdf", file);
           const res = await axios.post(
-            "http://localhost:8000/upload/pdf",
+            process.env.NEXT_PUBLIC_BASE_URL + "/upload/pdf",
             formData,
             { withCredentials: true },
           );

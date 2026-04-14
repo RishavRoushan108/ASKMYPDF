@@ -5,6 +5,8 @@ import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
 import { QdrantVectorStore } from "@langchain/qdrant";
 import { TaskType } from "@google/generative-ai";
 import { GoogleGenAI } from "@google/genai";
+import dotenv from "dotenv";
+dotenv.config();
 
 import { Queue } from "bullmq";
 
@@ -54,7 +56,7 @@ app.post("/upload/pdf", upload.single("pdf"), async function (req, res, next) {
 });
 
 const ai = new GoogleGenAI({
-  apiKey: "AIzaSyA4znAo0FxJO0ZHJGoqDJqPGFRWc6z3Pfc",
+  apiKey: process.env.GEMINI_API_KEY,
 });
 
 app.get("/chat", async (req, res) => {
@@ -69,7 +71,7 @@ app.get("/chat", async (req, res) => {
     }
 
     const embeddings = new GoogleGenerativeAIEmbeddings({
-      apiKey: "AIzaSyA4znAo0FxJO0ZHJGoqDJqPGFRWc6z3Pfc", // Your Gemini Key
+      apiKey: process.env.GEMINI_API_KEY, // Your Gemini Key
       model: "gemini-embedding-2-preview", // Latest stable embedding model
       taskType: TaskType.RETRIEVAL_QUERY,
     });

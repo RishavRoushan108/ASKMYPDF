@@ -35,9 +35,12 @@ const Chat: React.FC = () => {
     setLoading(true);
 
     try {
-      const res = await axios.get<ApiResponse>("http://localhost:8000/chat", {
-        params: { message },
-      });
+      const res = await axios.get<ApiResponse>(
+        process.env.NEXT_PUBLIC_BASE_URL + "/chat",
+        {
+          params: { message },
+        },
+      );
 
       const aiReply = res.data.messages;
       const docs = res.data.docs?.map((doc) => doc.pageContent);

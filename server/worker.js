@@ -6,6 +6,8 @@ import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
 import { TaskType } from "@google/generative-ai";
+import dotenv from "dotenv";
+dotenv.config();
 
 const worker = new Worker(
   "file-upload-queue",
@@ -37,7 +39,7 @@ const worker = new Worker(
       // https://docs.langchain.com/oss/javascript/integrations/vectorstores/qdrant
 
       const embeddings = new GoogleGenerativeAIEmbeddings({
-        apiKey: "AIzaSyA4znAo0FxJO0ZHJGoqDJqPGFRWc6z3Pfc", // Your Gemini Key
+        apiKey: process.env.GEMINI_API_KEY, // Your Gemini Key
         // https://docs.langchain.com/oss/python/integrations/embeddings/google_generative_ai --> docs for model
         model: "gemini-embedding-2-preview", // Latest stable embedding model
         outputDimensionality: 768,
