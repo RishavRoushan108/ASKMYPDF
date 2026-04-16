@@ -50,7 +50,7 @@ const worker = new Worker(
         texts,
         embeddings,
         {
-          url: "http://127.0.0.1:6333",
+          url: process.env.QDRANT_URL || "http://qdrant:6333",
           collectionName: "pdf-chunks",
         },
       );
@@ -61,7 +61,7 @@ const worker = new Worker(
     }
   },
   {
-    concurrency: 100,
-    connection: { host: "localhost", port: 6379 },
+    concurrency: 5,
+    connection: { host: process.env.REDIS_HOST || "valkey", port: 6379 },
   },
 );

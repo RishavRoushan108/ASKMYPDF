@@ -12,8 +12,8 @@ import { Queue } from "bullmq";
 
 const queue = new Queue("file-upload-queue", {
   connection: {
-    host: "localhost",
-    port: "6379",
+    host: process.env.REDIS_HOST || "valkey",
+    port: process.env.REDIS_PORT || 6379,
   },
 });
 
@@ -21,7 +21,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.FRONTEND_URL || "http://localhost:3000",
     credentials: true,
   }),
 );
@@ -78,7 +78,7 @@ app.get("/chat", async (req, res) => {
     const vectorStore = await QdrantVectorStore.fromExistingCollection(
       embeddings,
       {
-        url: "http://127.0.0.1:6333",
+        url: process.env.QDRANT_URL || "http://qdrant:6333",
         collectionName: "pdf-chunks",
       },
     );
