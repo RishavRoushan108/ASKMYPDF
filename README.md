@@ -47,6 +47,9 @@ This application solves that by:
    Context is sent to Gemini AI
    AI generates final answer
 
+   ![alt text](image.png)
+   ![alt text](image-1.png)
+
 ## 🏗️ Tech Stack
 
 ### Frontend
