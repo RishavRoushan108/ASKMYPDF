@@ -44,12 +44,16 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/upload/pdf", upload.single("pdf"), async function (req, res, next) {
+  const email = req.body.email;
+  console.log(email);
+  console.log("question reached");
   await queue.add(
     "file-ready",
     JSON.stringify({
       filename: req.file.originalname,
       destination: req.file.destination,
       path: req.file.path,
+      email,
     }),
   );
   res.json({ mssg: "pdf uploaded" });
@@ -62,7 +66,9 @@ const ai = new GoogleGenAI({
 app.get("/chat", async (req, res) => {
   try {
     const userquery = req.query.message;
+    const email = req.query.email;
     console.log(userquery);
+    console.log(email);
 
     if (!userquery || typeof userquery !== "string") {
       return res.status(400).json({
@@ -82,15 +88,55 @@ app.get("/chat", async (req, res) => {
         collectionName: "pdf-chunks",
       },
     );
+
+    console.log("Retriever started");
     const ret = vectorStore.asRetriever({
       k: 2,
+
+      filter: {
+        must: [
+          {
+            key: "metadata.userEmail",
+            match: {
+              value: email,
+            },
+          },
+        ],
+      },
     });
+
+    // const ret = vectorStore.asRetriever({
+    //   k: 2,
+    // });
+    console.log("Retriever initialized successfully");
     const result = await ret.invoke(userquery);
+    console.log("relevent context ", result);
+
+    if (!result || result.length === 0) {
+      return res.json({
+        messages:
+          "No documents found for this user. Please upload a PDF first.",
+        docs: [],
+      });
+    }
 
     const systemprompt = `
-     you are a helpful AI assistant who answer the user query based on the available context from pdf file.
-     context:${JSON.stringify(result)}
-  `;
+You are a helpful AI assistant.
+
+Answer the user's question ONLY using the provided PDF context.
+
+Rules:
+- If the answer exists in the context, answer clearly and concisely.
+- If the question is unrelated to the PDF context, reply:
+  "Your question is not related to the uploaded PDF."
+- Do not make up answers.
+- Do not use outside knowledge.
+- If context is insufficient, say:
+  "I could not find the answer in the uploaded PDF."
+
+PDF Context:
+${JSON.stringify(result)}
+`;
 
     const ans = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
@@ -99,6 +145,8 @@ app.get("/chat", async (req, res) => {
         { role: "user", text: userquery },
       ],
     });
+
+    console.log("final answer is ", ans);
 
     return res.json({ messages: ans.text, docs: result });
   } catch (err) {

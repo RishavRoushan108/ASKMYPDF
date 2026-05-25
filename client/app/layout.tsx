@@ -24,12 +24,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="h-screen flex flex-col">
-        <ClerkProvider>
+    <ClerkProvider>
+      <html
+        lang="en"
+        className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      >
+        <body className="h-screen flex flex-col">
           <div className="flex flex-col h-full w-full">
             <header className="flex justify-between items-center p-4 h-[10%]">
               <h1
@@ -44,8 +44,8 @@ export default function RootLayout({
 
             <main className="h-[90%] overflow-hidden">{children}</main>
           </div>
-        </ClerkProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

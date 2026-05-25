@@ -1,10 +1,13 @@
 "use client";
 import { FiUpload } from "react-icons/fi";
+import { useUser } from "@clerk/nextjs";
 import axios from "axios";
 
 import * as React from "react";
+import toast from "react-hot-toast";
 
 const FileUpload: React.FC = () => {
+  const { user } = useUser();
   const handlefileupload = async () => {
     const el = document.createElement("input");
     el.setAttribute("type", "file");
@@ -15,6 +18,7 @@ const FileUpload: React.FC = () => {
         if (file) {
           const formData = new FormData();
           formData.append("pdf", file);
+          formData.append("email", user?.emailAddresses[0]?.emailAddress || "");
           const res = await axios.post(
             process.env.NEXT_PUBLIC_BASE_URL + "/upload/pdf",
             formData,
@@ -22,6 +26,7 @@ const FileUpload: React.FC = () => {
           );
           console.log("file uploaded successfully");
           console.log(res);
+          toast.success("file uploaded sucessfully");
         }
       }
     });

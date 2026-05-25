@@ -3,6 +3,7 @@
 import React from "react";
 import axios from "axios";
 import { Send } from "lucide-react";
+import { useUser } from "@clerk/nextjs";
 
 interface IDoc {
   pageContent: string;
@@ -25,6 +26,7 @@ const Chat: React.FC = () => {
   const [message, setMessage] = React.useState<string>("");
   const [messages, setMessages] = React.useState<Imessage[]>([]);
   const [loading, setLoading] = React.useState<boolean>(false);
+  const { user } = useUser();
 
   const handleSend = async () => {
     if (!message.trim()) return;
@@ -38,7 +40,7 @@ const Chat: React.FC = () => {
       const res = await axios.get<ApiResponse>(
         process.env.NEXT_PUBLIC_BASE_URL + "/chat",
         {
-          params: { message },
+          params: { message, email: user?.emailAddresses[0]?.emailAddress },
         },
       );
 

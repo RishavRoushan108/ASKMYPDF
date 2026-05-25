@@ -35,6 +35,18 @@ const worker = new Worker(
       console.log("Split into chunks:", texts.length);
       console.log("Split into chunks:", texts);
 
+      const docsWithMetadata = texts.map((doc) => {
+        return {
+          pageContent: doc.pageContent, // Explicitly keep the text content
+          metadata: {
+            ...doc.metadata, // Preserve existing metadata (like page numbers, source)
+            userEmail: data.email, // Inject your additional user email
+          },
+        };
+      });
+
+      console.log("docsWithMetadata", docsWithMetadata);
+
       // quadrant is used for vector embedding
       // https://docs.langchain.com/oss/javascript/integrations/vectorstores/qdrant
 
@@ -47,7 +59,7 @@ const worker = new Worker(
       });
 
       const vectorStore = await QdrantVectorStore.fromDocuments(
-        texts,
+        docsWithMetadata,
         embeddings,
         {
           url: process.env.QDRANT_URL || "http://qdrant:6333",
