@@ -2,6 +2,12 @@
 
 An AI-powered application that allows users to upload PDFs and ask questions based on their content. The system processes documents, stores embeddings, and retrieves the most relevant context to generate accurate answers.
 
+## 🔗 Live Application
+
+> **Try it here:** [http://13.49.146.250:3000/](http://13.49.146.250:3000/)
+
+---
+
 ## 🚀 What This Application Does
 
 ASKMYPDF helps users interact with PDF documents like ChatGPT.
